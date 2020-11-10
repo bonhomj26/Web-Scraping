@@ -12,8 +12,9 @@ import datetime as dt
 # Mac
 #################################################
 # Set Executable Path & Initialize Chrome Browser
-executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-browser = Browser("chrome", **executable_path, headless=False)
+# executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
+# browser = Browser("chrome", **executable_path, headless=False)
+
 
 #################################################
 # Windows
@@ -21,6 +22,9 @@ browser = Browser("chrome", **executable_path, headless=False)
 # Set Executable Path & Initialize Chrome Browser
 # executable_path = {"executable_path": "./chromedriver.exe"}
 # browser = Browser("chrome", **executable_path)
+
+executable_path = {'executable_path': '/Users/dhalg/Downloads/chromedriver'}
+browser = Browser('chrome', **executable_path, headless=False)
 
 
 #################################################
@@ -93,24 +97,24 @@ def featured_image(browser):
 # Mars Weather
 #################################################
 # Mars Weather Twitter Account Web Scraper
-def twitter_weather(browser):
-    # Visit the Mars Weather Twitter Account
-    url = "https://twitter.com/marswxreport?lang=en"
-    browser.visit(url)
+# def twitter_weather(browser):
+#     # Visit the Mars Weather Twitter Account
+#     url = "https://twitter.com/marswxreport?lang=en"
+#     browser.visit(url)
     
-    # Parse Results HTML with BeautifulSoup
-    html = browser.html
-    weather_soup = BeautifulSoup(html, "html.parser")
+#     # Parse Results HTML with BeautifulSoup
+#     html = browser.html
+#     weather_soup = BeautifulSoup(html, "html.parser")
     
-    # Find a Tweet with the data-name `Mars Weather`
-    mars_weather_tweet = weather_soup.find("div", 
-                                       attrs={
-                                           "class": "tweet", 
-                                            "data-name": "Mars Weather"
-                                        })
-   # Search Within Tweet for <p> Tag Containing Tweet Text
-    mars_weather = mars_weather_tweet.find("p", "tweet-text").get_text()
-    return mars_weather
+#     # Find a Tweet with the data-name `Mars Weather`
+#     mars_weather_tweet = weather_soup.find("div", 
+#                                        attrs={
+#                                            "class": "tweet", 
+#                                             "data-name": "Mars Weather"
+#                                         })
+#    # Search Within Tweet for <p> Tag Containing Tweet Text
+#     mars_weather = mars_weather_tweet.find("p", "tweet-text").get_text()
+#     return mars_weather
 
 
 #################################################
@@ -182,11 +186,13 @@ def scrape_hemisphere(html_text):
 # Main Web Scraping Bot
 #################################################
 def scrape_all():
-    executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    browser = Browser("chrome", **executable_path, headless=False)
+#     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
+#     browser = Browser("chrome", **executable_path, headless=False)
+    executable_path = {'executable_path': '/Users/dhalg/Downloads/chromedriver'}
+    browser = Browser('chrome', **executable_path, headless=False)
     news_title, news_paragraph = mars_news(browser)
     img_url = featured_image(browser)
-    mars_weather = twitter_weather(browser)
+    #mars_weather = twitter_weather(browser)
     facts = mars_facts()
     hemisphere_image_urls = hemisphere(browser)
     timestamp = dt.datetime.now()
@@ -195,7 +201,7 @@ def scrape_all():
         "news_title": news_title,
         "news_paragraph": news_paragraph,
         "featured_image": img_url,
-        "weather": mars_weather,
+        #"weather": mars_weather,
         "facts": facts,
         "hemispheres": hemisphere_image_urls,
         "last_modified": timestamp
